@@ -1,6 +1,6 @@
 #include<iostream>
 #include<stdio.h>
-#include<stdlib.h>
+#include<cstdlib>
 #include<string.h>
 #include<fstream>
 #include<math.h>
@@ -201,13 +201,30 @@ class calculator
 		    return pow(a,b);
 		}
 };
-
-class phone: public game, public calculator
+class system_details
+{
+    public:
+    void getdetails()
+    {
+        cout<<"System Info: "<<endl;
+        cout<<"Processor\n3.05Gh\nDimensity9000\nOcta-Core"<<endl;
+        cout<<"RAM\n8.00+4.00 GB"<<endl;
+        cout<<"Android version: \n12"<<endl;
+        cout<<"Phone Storage \n128GB"<<endl;
+    }
+};
+class phone: public game, public calculator , public system_details
 {
 	public:
 	phone()
 	{
 		cout<<"Switch on"<<endl;
+	}
+	virtual void getdetails()
+	{
+	    cout<<"User details: "<<endl;
+	    cout<<"Name: \nShravan Serel"<<endl;
+	    cout<<"Email: \nshravan.serel@gmail.com"<<endl;
 	}
 };
 
@@ -215,18 +232,30 @@ int main()
 {
 	string line;
 	phone p;
+	system_details *r;
+	r = &p;
 	int option, games;
 	char operation, book;
 	do{
-		cout<<"1.Calculator"<<endl;
-		cout<<"2.Library"<<endl;
-		cout<<"3.Gamespace"<<endl;
-		cout<<"4.Switch off"<<endl;
+	    cout<<"1.System details"<<endl;
+	    cout<<"2.User details"<<endl;
+		cout<<"3.Calculator"<<endl;
+		cout<<"4.Gamespace"<<endl;
+		cout<<"5.Library"<<endl;
+		cout<<"6.Switch off"<<endl;
 		cout<<"What app would you like to use?"<<endl;
 		cin>>option;
 		switch(option)
 		{
-			case 1:
+		    case 1:
+		        r->getdetails();
+		        break;
+		        
+		    case 2:
+		        p.getdetails();
+		        break;
+		        
+			case 3:
 				cout<<"Welcome to Calculator"<<endl;
 				p.initialize();
 				cout<<"Enter operation: ";
@@ -245,9 +274,9 @@ int main()
 				cout<<p.power()<<endl;				
 				break;
 				
-			case 2:
+			case 4:
 					cout<<"Welcome to gamespace!"<<endl;
-					cout<<"What game would you like to play";
+					cout<<"What game would you like to play"<<endl;
 					cout<<"1.Rock Paper Scissors"<<endl;
 					cout<<"2.Race"<<endl;
 						cin>>games;
@@ -266,7 +295,7 @@ int main()
 					}
 					break;
 				
-			case 3:
+			case 5:
 				cout<<"Welcome to Library"<<endl;
 				ifstream ifile;
 				cout<<"What short story would you like to read?"<<endl;
@@ -300,9 +329,8 @@ int main()
 					break;
 				}
 				break;
-			
 			}
-		}while(option != 4);
+		}while(option != 6);
 	
 		cout<<"Switching off.....";
 }
